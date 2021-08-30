@@ -1,4 +1,4 @@
-import { RouteConfig } from "vue-router";
+import { RouteConfig } from 'vue-router';
 
 // 路由配置规则
 const routes: Array<RouteConfig> = [];
