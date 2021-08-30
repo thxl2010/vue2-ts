@@ -8,6 +8,7 @@
 <script lang="ts">
 import Vue from 'vue';
 // import Component from 'vue-class-component';
+import request from '@/utils/request';
 
 export default Vue.extend({
   data() {
@@ -20,6 +21,11 @@ export default Vue.extend({
     test() {
       this.name;
     },
+  },
+  created() {
+    request.get('/api/getUser').then((data) => {
+      console.log('request data :', data);
+    });
   },
 });
 
