@@ -1,0 +1,9 @@
+{
+  "port": 8080,
+  "watch": true,
+  "static": "./",
+  "read-only": false,
+  "no-cors": false,
+  "no-gzip": false,
+  "routes": "route.json"
+}

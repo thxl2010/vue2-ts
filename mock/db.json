@@ -1,0 +1,17 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "getUser": {
+    "status": "OK",
+    "data": {
+      "id": "100",
+      "username": "hello",
+      "mobile": "18719493200"
+    }
+  }
+}
