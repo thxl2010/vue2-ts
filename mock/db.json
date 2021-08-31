@@ -1,11 +1,11 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+  "login": {
+    "status": 200,
+    "message": "",
+    "data": {
+      "state": 1
     }
-  ],
+  },
   "getUser": {
     "status": "OK",
     "data": {

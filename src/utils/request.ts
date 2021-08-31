@@ -1,4 +1,9 @@
-import axios from 'axios';
+import axios, {
+  AxiosRequestConfig,
+  Method,
+  AxiosPromise,
+  AxiosResponse,
+} from 'axios';
 import JSONbig from 'json-bigint';
 import qs from 'qs';
 import { isJson } from './index';
@@ -37,7 +42,7 @@ request.interceptors.request.use(
 
 // 响应拦截器
 request.interceptors.response.use(
-  (res) => {
+  (res: AxiosResponse): any => {
     // console.log('axios.interceptors.response : res : ', res);
     const data = res.data;
     if (data.status !== 200 && data.status !== 'OK') {
@@ -47,4 +52,49 @@ request.interceptors.response.use(
   },
   (error) => Promise.reject(error)
 );
+
+const fetch = (
+  url: string,
+  params: any,
+  method: Method = 'get'
+): AxiosPromise => {
+  const config: AxiosRequestConfig = {
+    method,
+    url,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    },
+  };
+  if (method === 'get') {
+    config.params = params;
+  } else {
+    config.data = params;
+  }
+
+  return request(config);
+};
+
+const fetchJson = (
+  url: string,
+  params: any,
+  method: Method = 'get'
+): AxiosPromise => {
+  const config: AxiosRequestConfig = {
+    method,
+    url,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  };
+  if (method === 'get') {
+    config.params = params;
+  } else {
+    config.data = params;
+  }
+
+  return request(config);
+};
+
 export default request;
+
+export { fetch, fetchJson };

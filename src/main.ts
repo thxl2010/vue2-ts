@@ -4,11 +4,13 @@ import ElementUI from 'element-ui';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import Common from './utils/common';
 
 // 加载全局样式
 import './styles/index.scss';
 
 Vue.use(ElementUI);
+Vue.use(Common);
 
 Vue.config.productionTip = false;
 
