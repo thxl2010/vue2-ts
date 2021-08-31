@@ -3,7 +3,10 @@
     "status": 200,
     "message": "",
     "data": {
-      "state": 1
+      "state": 1,
+      "name": "Du",
+      "mobile": 18767123456,
+      "id": "100"
     }
   },
   "getUser": {
