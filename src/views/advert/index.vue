@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <div class="advert">广告管理</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'App',
+  name: 'AdvertIndex',
 });
 </script>
 
