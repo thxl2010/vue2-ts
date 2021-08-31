@@ -31,7 +31,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { login } from '@/services/user';
-import { Form, FormItem } from 'element-ui';
+import { Form } from 'element-ui';
 
 export default Vue.extend({
   name: 'LoginIndex',
@@ -65,7 +65,7 @@ export default Vue.extend({
   },
   methods: {
     onSubmit() {
-      const form: Form = this.$refs.form;
+      const form = this.$refs.form as Form;
       form.validate(async (valid) => {
         if (valid) {
           try {
