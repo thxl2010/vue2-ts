@@ -32,6 +32,7 @@
 import Vue from 'vue';
 import { login } from '@/services/user';
 import { Form } from 'element-ui';
+import { SET_USER } from '@/store/types';
 
 export default Vue.extend({
   name: 'LoginIndex',
@@ -76,6 +77,7 @@ export default Vue.extend({
               this.$message.error('登录失败，请重试！');
             } else {
               this.$message.success('登录成功');
+              this.$store.commit(SET_USER, data);
               this.$router.push({ name: 'home' });
             }
           } catch (error) {
