@@ -18,18 +18,21 @@ const routes: Array<RouteConfig> = [
         name: 'home',
         component: () =>
           import(/* webpackChunkName: 'home' */ '@/views/home/index.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/role',
         name: 'role',
         component: () =>
           import(/* webpackChunkName: 'role' */ '@/views/role/index.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/menu',
         name: 'menu',
         component: () =>
           import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/resource',
@@ -38,18 +41,21 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'resource' */ '@/views/resource/index.vue'
           ),
+        meta: { requiresAuth: true },
       },
       {
         path: '/course',
         name: 'course',
         component: () =>
           import(/* webpackChunkName: 'course' */ '@/views/course/index.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/user',
         name: 'user',
         component: () =>
           import(/* webpackChunkName: 'user' */ '@/views/user/index.vue'),
+        meta: { requiresAuth: true },
       },
       // ! url /advert 会被广告拦截插件拦截
       {
@@ -57,6 +63,7 @@ const routes: Array<RouteConfig> = [
         name: 'advert',
         component: () =>
           import(/* webpackChunkName: 'advert' */ '@/views/advert/index.vue'),
+        meta: { requiresAuth: true },
       },
       {
         path: '/advert-space',
@@ -65,6 +72,7 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'advert-space' */ '@/views/advert-space/index.vue'
           ),
+        meta: { requiresAuth: true },
       },
     ],
   },

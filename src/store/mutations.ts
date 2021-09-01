@@ -5,5 +5,6 @@ import { UserInterface } from '@/models/user/User.interface';
 export default {
   [SET_USER](state: StateInterface, data: UserInterface) {
     state.user = data;
+    window.localStorage.setItem('user', JSON.stringify(data));
   },
 };

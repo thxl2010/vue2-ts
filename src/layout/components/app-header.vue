@@ -11,12 +11,15 @@
         <el-avatar
           shape="square"
           :size="40"
-          src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
+          :src="
+            (user && user.avatar) ||
+            'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
+          "
         ></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>用户ID</el-dropdown-item>
+        <el-dropdown-item>{{ (user && user.id) || '--' }}</el-dropdown-item>
         <el-dropdown-item divided>退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -25,9 +28,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 export default Vue.extend({
   name: 'AppHeader',
+  computed: {
+    ...mapState(['user']),
+  },
 });
 </script>
 

@@ -3,6 +3,7 @@ export interface UserInterface {
   id: string;
   name: string;
   mobile: string;
+  avatar: string;
 }
 
 export interface UserLoginFormInterface {
