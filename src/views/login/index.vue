@@ -77,8 +77,8 @@ export default Vue.extend({
               this.$message.error('登录失败，请重试！');
             } else {
               this.$message.success('登录成功');
-              this.$store.commit(SET_USER, data);
-              this.$router.push({ name: 'home' });
+              this.$store.commit(SET_USER, data.content);
+              this.$router.push((this.$route.query.redirect as string) || '/');
             }
           } catch (error) {
             this.$catchError(error);

@@ -12,14 +12,14 @@
           shape="square"
           :size="40"
           :src="
-            (user && user.avatar) ||
+            userInfo.avatar ||
             'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
           "
         ></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>{{ (user && user.id) || '--' }}</el-dropdown-item>
+        <el-dropdown-item>{{ userInfo.id || '--' }}</el-dropdown-item>
         <el-dropdown-item divided>退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -28,12 +28,23 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapState } from 'vuex';
+import { getUserInfo } from '@/services/user';
 
 export default Vue.extend({
   name: 'AppHeader',
-  computed: {
-    ...mapState(['user']),
+  data() {
+    return {
+      userInfo: {},
+    };
+  },
+  created() {
+    this.getUser();
+  },
+  methods: {
+    async getUser() {
+      const data = await getUserInfo();
+      this.userInfo = data;
+    },
   },
 });
 </script>
