@@ -1,3 +1,3 @@
 import { StateInterface } from '@/models/store/state';
 
-export const userName = (state: StateInterface) => state.user?.name;
+export const userId = (state: StateInterface) => state.user?.user_id;

@@ -7,6 +7,10 @@ import axios, {
 import JSONbig from 'json-bigint';
 import qs from 'qs';
 import { isJson } from './index';
+import store from '@/store/index';
+import { SET_USER } from '@/store/types';
+import { Message } from 'element-ui';
+import router from '@/router/index';
 
 // ! [axios#983: json parse bigint](https://github.com/axios/axios/issues/983)
 const JSONbigString = JSONbig({ storeAsString: true });
@@ -24,6 +28,9 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {
+    if (store.state.user) {
+      config.headers.Authorization = store.state.user.access_token;
+    }
     if (config.method === 'post') {
       if (isJson(config)) {
         config.data = JSON.stringify(config.data);
@@ -41,16 +48,83 @@ request.interceptors.request.use(
 );
 
 // 响应拦截器
+function redirectLogin() {
+  router.push({
+    name: 'login',
+    query: { redirect: router.currentRoute.fullPath },
+  });
+}
+
+function refreshToken() {
+  return axios.create().post('/api/refreshToken', {
+    data: qs.stringify({
+      refreshtoken: store.state.user?.refresh_token,
+    }),
+  });
+}
+
 request.interceptors.response.use(
   (res: AxiosResponse): any => {
-    // console.log('axios.interceptors.response : res : ', res);
+    console.log('axios.interceptors.response : res : ', res);
     const data = res.data;
-    if (data.status !== 200 && data.status !== 'OK') {
+    if (data.status === 401) {
+      return Promise.reject(data);
+    } else if (data.status !== 200 && data.status !== 'OK') {
       return Promise.reject(data);
     }
     return data.data;
   },
-  (error) => Promise.reject(error)
+  async (error) => {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      const { status } = error.response;
+      if (status === 400) {
+        Message.error('请求参数错误');
+      } else if (status === 401) {
+        // Token 无效: 未提供、无效、过期
+        if (!store.state.user) {
+          redirectLogin();
+          return Promise.reject(error);
+        }
+
+        // 尝试刷新获取新的 token
+        try {
+          const { data } = await axios.create().post('/api/refreshToken', {
+            data: qs.stringify({
+              refreshtoken: store.state.user?.refresh_token,
+            }),
+          });
+
+          // ! 把刷新那发哦的 access_token 更新
+          store.commit(SET_USER, data.content);
+          // ! 把本次失败的请求重新发出
+          return request(error.config);
+        } catch (err) {
+          // 清除当前登录用户状态
+          store.commit(SET_USER, null);
+          // 跳转到登录页
+          redirectLogin();
+        }
+      } else if (status === 403) {
+        Message.error('没有权限，请联系管理员');
+      } else if (status === 404) {
+        Message.error('请求资源不存在');
+      } else if (status >= 500) {
+        Message.error('服务器错误，请联系管理员');
+      }
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+
+    return Promise.reject(error);
+  }
 );
 
 const fetch = (

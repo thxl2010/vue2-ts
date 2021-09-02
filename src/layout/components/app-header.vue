@@ -11,16 +11,13 @@
         <el-avatar
           shape="square"
           :size="40"
-          :src="
-            userInfo.avatar ||
-            'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'
-          "
+          :src="userInfo.avatar || require('@/assets/avatar.png')"
         ></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>{{ userInfo.id || '--' }}</el-dropdown-item>
-        <el-dropdown-item divided>退出</el-dropdown-item>
+        <el-dropdown-item divided @click.native="logout">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -29,6 +26,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { getUserInfo } from '@/services/user';
+import { SET_USER } from '@/store/types';
 
 export default Vue.extend({
   name: 'AppHeader',
@@ -44,6 +42,10 @@ export default Vue.extend({
     async getUser() {
       const data = await getUserInfo();
       this.userInfo = data;
+    },
+    logout() {
+      this.$store.commit(SET_USER, null);
+      this.$router.push({ name: 'login' });
     },
   },
 });
