@@ -16,8 +16,8 @@
       }
     }
   },
-  "getUser1": {
-    "status": 401,
+  "getUser": {
+    "status": 200,
     "data": {
       "id": "10e390ac33668",
       "name": "Du",
@@ -25,7 +25,7 @@
       "avatar": "https://portrait.gitee.com/uploads/avatars/user/345/1037448_2010thxl_1578938880.png!avatar30"
     }
   },
-  "getUser": {
+  "getUser1": {
     "status": 401,
     "data": "Unauthorized",
     "message": "Request failed with status code 401"
@@ -35,13 +35,14 @@
     "state": 1,
     "content": {
       "access_token": "A8gAci9F0p41bxl0",
-      "expires_in": 2153,
+      "expires_in": 3000,
       "jti": "973M9TNwZKUsFnOrCXdU6Gf7UjHbnk5k",
       "organization": "18767123456",
       "refresh_token": "N6JSG32jOj29rf4hCVa",
       "scope": "read",
       "token_type": "bearer",
       "user_id": "10e390ac33668"
-    }
+    },
+    "success": true
   }
 }

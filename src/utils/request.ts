@@ -63,12 +63,65 @@ function refreshToken() {
   });
 }
 
+let isRefresing = false;
+let requests = []; // 存储刷新 Token 期间挂起的请求
 request.interceptors.response.use(
   (res: AxiosResponse): any => {
     console.log('axios.interceptors.response : res : ', res);
     const data = res.data;
-    if (data.status === 401) {
-      return Promise.reject(data);
+    const { status } = data;
+    if (status === 400) {
+      Message.error('请求参数错误');
+    } else if (status === 401) {
+      // Token 无效: 未提供、无效、过期
+      if (!store.state.user) {
+        redirectLogin();
+        return Promise.reject(data);
+      }
+
+      // 尝试刷新获取新的 token
+      if (!isRefresing) {
+        isRefresing = true;
+        refreshToken()
+          .then((result) => {
+            const { data } = result;
+            if (!data.success) {
+              throw new Error('刷新 Token 失败');
+            }
+            // ! 把刷新获取到的 access_token 更新
+            store.commit(SET_USER, data.content);
+            // 刷新状态下，挂起的请求重新发出
+            requests.forEach((cb) => cb());
+            requests = [];
+            // ! 把本次失败的请求重新发出
+            return request(res.config);
+          })
+          .catch((err) => {
+            console.log('refreshToken err :', err);
+            // 清除当前登录用户状态
+            store.commit(SET_USER, null);
+            // 跳转到登录页
+            redirectLogin();
+
+            return Promise.reject(data);
+          })
+          .finally(() => {
+            isRefresing = false;
+          });
+      }
+
+      // 刷新状态下，把请求挂起放到 requests 数组中
+      return new Promise((resolve) => {
+        requests.push(() => {
+          resolve(request(res.config));
+        });
+      });
+    } else if (status === 403) {
+      Message.error('没有权限，请联系管理员');
+    } else if (status === 404) {
+      Message.error('请求资源不存在');
+    } else if (status >= 500) {
+      Message.error('服务器错误，请联系管理员');
     } else if (data.status !== 200 && data.status !== 'OK') {
       return Promise.reject(data);
     }
@@ -89,23 +142,42 @@ request.interceptors.response.use(
         }
 
         // 尝试刷新获取新的 token
-        try {
-          const { data } = await axios.create().post('/api/refreshToken', {
-            data: qs.stringify({
-              refreshtoken: store.state.user?.refresh_token,
-            }),
-          });
+        if (!isRefresing) {
+          isRefresing = true;
+          refreshToken()
+            .then((res) => {
+              const { data } = res;
+              if (!data.success) {
+                throw new Error('刷新 Token 失败');
+              }
+              // ! 把刷新获取到的 access_token 更新
+              store.commit(SET_USER, data.content);
+              // 刷新状态下，挂起的请求重新发出
+              requests.forEach((cb) => cb());
+              requests = [];
+              // ! 把本次失败的请求重新发出
+              return request(error.config);
+            })
+            .catch((err) => {
+              console.log('refreshToken err :', err);
+              // 清除当前登录用户状态
+              store.commit(SET_USER, null);
+              // 跳转到登录页
+              redirectLogin();
 
-          // ! 把刷新那发哦的 access_token 更新
-          store.commit(SET_USER, data.content);
-          // ! 把本次失败的请求重新发出
-          return request(error.config);
-        } catch (err) {
-          // 清除当前登录用户状态
-          store.commit(SET_USER, null);
-          // 跳转到登录页
-          redirectLogin();
+              return Promise.reject(error);
+            })
+            .finally(() => {
+              isRefresing = false;
+            });
         }
+
+        // 刷新状态下，把请求挂起放到 requests 数组中
+        return new Promise((resolve) => {
+          requests.push(() => {
+            resolve(request(error.config));
+          });
+        });
       } else if (status === 403) {
         Message.error('没有权限，请联系管理员');
       } else if (status === 404) {
