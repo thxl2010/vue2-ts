@@ -10,13 +10,12 @@ export interface UserInterface {
 }
 
 export interface UserLoginFormInterface {
-  mobile: string;
+  phone: string;
   password: string;
 }
 
 export interface UserInfoInterface {
-  id: string;
-  name: string;
-  mobile: string;
-  avatar: string;
+  isUpdatedPassword: boolean;
+  userName: string;
+  portrait: string;
 }

@@ -56,7 +56,7 @@ function redirectLogin() {
 }
 
 function refreshToken() {
-  return axios.create().post('/api/refreshToken', {
+  return axios.create().post('/front/user/refresh_token', {
     data: qs.stringify({
       refreshtoken: store.state.user?.refresh_token,
     }),
@@ -64,13 +64,15 @@ function refreshToken() {
 }
 
 let isRefresing = false;
-let requests = []; // 存储刷新 Token 期间挂起的请求
+let requests: Array<() => void> = []; // 存储刷新 Token 期间挂起的请求
 request.interceptors.response.use(
   (res: AxiosResponse): any => {
     console.log('axios.interceptors.response : res : ', res);
     const data = res.data;
-    const { status } = data;
-    if (status === 400) {
+    const { state: status, success, content /* , message */ } = data;
+    if (success) {
+      return content;
+    } else if (status === 400) {
       Message.error('请求参数错误');
     } else if (status === 401) {
       // Token 无效: 未提供、无效、过期
@@ -122,10 +124,8 @@ request.interceptors.response.use(
       Message.error('请求资源不存在');
     } else if (status >= 500) {
       Message.error('服务器错误，请联系管理员');
-    } else if (data.status !== 200 && data.status !== 'OK') {
-      return Promise.reject(data);
     }
-    return data.data;
+    return Promise.reject(data);
   },
   async (error) => {
     if (error.response) {

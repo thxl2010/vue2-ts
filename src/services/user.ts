@@ -5,9 +5,9 @@ import { fetch } from '@/utils/request';
 import { UserLoginFormInterface } from '@/models/user/User.interface';
 
 export function login(data: UserLoginFormInterface): Promise<any> {
-  return fetch('/api/login', data, 'post');
+  return fetch('/front/user/login', data, 'post');
 }
 
 export function getUserInfo(): Promise<any> {
-  return fetch('/api/getUser', null, 'get');
+  return fetch('/front/user/getInfo', null, 'get');
 }

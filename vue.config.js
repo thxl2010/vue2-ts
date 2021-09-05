@@ -15,6 +15,15 @@ module.exports = {
   devServer: {
     port: 3000,
     proxy: {
+      '/boss': {
+        target: 'http://eduboss.lagou.com',
+        changeOrigin: true, // 把请求头中的 host 配置为 target
+      },
+      '/front': {
+        target: 'http://edufront.lagou.com',
+        ws: true,
+        changeOrigin: true,
+      },
       '/api': {
         target: 'http://localhost:8090',
         ws: true,

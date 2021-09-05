@@ -11,12 +11,12 @@
         <el-avatar
           shape="square"
           :size="40"
-          :src="userInfo.avatar || require('@/assets/avatar.png')"
+          :src="userInfo.portrait || require('@/assets/avatar.png')"
         ></el-avatar>
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>{{ userInfo.id || '--' }}</el-dropdown-item>
+        <el-dropdown-item>{{ userInfo.userName || '--' }}</el-dropdown-item>
         <el-dropdown-item divided @click.native="logout">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -32,7 +32,10 @@ export default Vue.extend({
   name: 'AppHeader',
   data() {
     return {
-      userInfo: {},
+      userInfo: {
+        userName: '',
+        portrait: '',
+      },
     };
   },
   created() {

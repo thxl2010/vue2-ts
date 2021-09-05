@@ -1,48 +1,35 @@
 {
-  "login": {
-    "status": 200,
-    "message": "",
-    "data": {
-      "state": 1,
-      "content": {
-        "access_token": "T2gAci9F0p41bxl0",
-        "expires_in": 2153,
-        "jti": "973M9TNwZKUsFnOrCXdU6Gf7UjHbnk5k",
-        "organization": "18767123456",
-        "refresh_token": "N6JSG32jOj29rf4hCVa",
-        "scope": "read",
-        "token_type": "bearer",
-        "user_id": "10e390ac33668"
-      }
+  "frontuserlogin": {
+    "success": true,
+    "state": 1,
+    "message": "success",
+    "content": "{\"access_token\":\"T2gAci9F0p41bxl0\",\"expires_in\":2153,\"jti\":\"973M9TNwZKUsFnOrCXdU6Gf7UjHbnk5k\",\"organization\":\"18767123456\",\"refresh_token\":\"N6JSG32jOj29rf4hCVa\",\"scope\":\"read\",\"token_type\":\"bearer\",\"user_id\":\"10e390ac33668\"}"
+  },
+  "frontuserlogin1": {
+    "state": 206,
+    "message": "登录失败(040003)",
+    "content": null,
+    "success": false
+  },
+  "frontusergetInfo": {
+    "state": 1,
+    "success": true,
+    "message": "success",
+    "content": {
+      "isUpdatedPassword": true,
+      "userName": "18201288771",
+      "portrait": "https://edu-lagou.oss-cn-beijing.aliyuncs.com/images/2020/07/10/15943594999396473.png"
     }
   },
-  "getUser": {
-    "status": 200,
-    "data": {
-      "id": "10e390ac33668",
-      "name": "Du",
-      "mobile": 18767123456,
-      "avatar": "https://portrait.gitee.com/uploads/avatars/user/345/1037448_2010thxl_1578938880.png!avatar30"
-    }
-  },
-  "getUser1": {
-    "status": 401,
+  "frontusergetInfo1": {
+    "state": 401,
     "data": "Unauthorized",
     "message": "Request failed with status code 401"
   },
-  "refreshToken": {
-    "status": 200,
+  "frontuserrefresh_token": {
     "state": 1,
-    "content": {
-      "access_token": "A8gAci9F0p41bxl0",
-      "expires_in": 3000,
-      "jti": "973M9TNwZKUsFnOrCXdU6Gf7UjHbnk5k",
-      "organization": "18767123456",
-      "refresh_token": "N6JSG32jOj29rf4hCVa",
-      "scope": "read",
-      "token_type": "bearer",
-      "user_id": "10e390ac33668"
-    },
-    "success": true
+    "success": true,
+    "message": "success",
+    "content": "{\"access_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTAwMDMwMDE5IiwidXNlcl9uYW1lIjoiMTgyMDEyODg3NzEiLCJzY29wZSI6WyJyZWFkIl0sIm9yZ2FuaXphdGlvbiI6IjE4MjAxMjg4NzcxIiwiZXhwIjoxNjMwODMyNTMyLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJqdGkiOiJLZjJMb3RZUmQ3d1pyUWZxLWVnTEFDTkJ4dlEiLCJjbGllbnRfaWQiOiJ0ZXN0X2NsaWVudCJ9.HmP8nq9cdea4idjrpBaVHZ0XO3g9s4hg3TwfvXanTs4\",\"token_type\":\"bearer\",\"refresh_token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTAwMDMwMDE5IiwidXNlcl9uYW1lIjoiMTgyMDEyODg3NzEiLCJzY29wZSI6WyJyZWFkIl0sIm9yZ2FuaXphdGlvbiI6IjE4MjAxMjg4NzcxIiwiYXRpIjoiS2YyTG90WVJkN3daclFmcS1lZ0xBQ05CeHZRIiwiZXhwIjoxNjMwOTMzMzMyLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJqdGkiOiJOZjV1RWg5MXloMnQ3Qmg2WnRUSE9UeWw3VGsiLCJjbGllbnRfaWQiOiJ0ZXN0X2NsaWVudCJ9.MAw6-hKUupv-RF88gYVP5Fc5VG-J-eGQlzPj_JIqf8c\",\"expires_in\":7199,\"scope\":\"read\",\"user_id\":\"100030019\",\"organization\":\"18201288771\",\"jti\":\"Kf2LotYRd7wZrQfq-egLACNBxvQ\"}"
   }
 }

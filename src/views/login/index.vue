@@ -9,8 +9,8 @@
       label-position="top"
       class="login-form"
     >
-      <el-form-item label="手机号" prop="mobile">
-        <el-input v-model="form.mobile"></el-input>
+      <el-form-item label="手机号" prop="phone">
+        <el-input v-model="form.phone"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input type="password" v-model="form.password"></el-input>
@@ -39,11 +39,11 @@ export default Vue.extend({
   data() {
     return {
       form: {
-        mobile: '',
+        phone: '',
         password: '',
       },
       rules: {
-        mobile: [
+        phone: [
           { required: true, message: '请输入手机号', trigger: 'blur' },
           {
             pattern: /^1\d{10}/,
@@ -72,14 +72,9 @@ export default Vue.extend({
           try {
             this.isLoading = true;
             const data = await login(this.form);
-            console.log('onSubmit data :', data);
-            if (data.state !== 1) {
-              this.$message.error('登录失败，请重试！');
-            } else {
-              this.$message.success('登录成功');
-              this.$store.commit(SET_USER, data.content);
-              this.$router.push((this.$route.query.redirect as string) || '/');
-            }
+            this.$message.success('登录成功');
+            this.$store.commit(SET_USER, data);
+            this.$router.push((this.$route.query.redirect as string) || '/');
           } catch (error) {
             this.$catchError(error);
           }

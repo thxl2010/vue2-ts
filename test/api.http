@@ -1,0 +1,4 @@
+
+# http://edufront.lagou.com/front/doc.html#/edu-front-boot/%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%A3/loginUsingPOST
+POST http://edufront.lagou.com/front/user/login?password=111111&phone=18201288771
+Content-Type: "x-www-form-urlencoded"
