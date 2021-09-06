@@ -31,7 +31,7 @@ request.interceptors.request.use(
     if (store.state.user) {
       config.headers.Authorization = store.state.user.access_token;
     }
-    if (config.method === 'post') {
+    if (config.method?.toLowerCase() !== 'get') {
       if (isJson(config)) {
         config.data = JSON.stringify(config.data);
       } else {
@@ -69,6 +69,14 @@ request.interceptors.response.use(
   (res: AxiosResponse): any => {
     console.log('axios.interceptors.response : res : ', res);
     const data = res.data;
+
+    if ('code' in data && 'mesg' in data) {
+      if (data.code !== '000000') {
+        return data;
+      }
+      return data.data;
+    }
+
     const { state: status, success, content /* , message */ } = data;
     if (success) {
       return content;
@@ -128,6 +136,7 @@ request.interceptors.response.use(
     return Promise.reject(data);
   },
   async (error) => {
+    console.log('request.interceptors.response error: ', error);
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
