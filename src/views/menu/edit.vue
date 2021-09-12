@@ -1,6 +1,6 @@
 <template>
-  <div class="menu-create">
-    <MenuForm :isEdit="false" />
+  <div class="menu-edit">
+    <MenuForm :isEdit="true" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import Vue from 'vue';
 import MenuForm from './components/MenuForm.vue';
 
 export default Vue.extend({
-  name: 'MenuCreate',
+  name: 'MenuEdit',
   components: {
     MenuForm,
   },

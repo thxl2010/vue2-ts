@@ -14,7 +14,7 @@
         <el-table-column prop="orderNum" label="排序"> </el-table-column>
         <el-table-column label="操作" width="150">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            <el-button size="mini" @click="handleEdit(scope.row)"
               >编辑</el-button
             >
             <el-button
@@ -46,8 +46,13 @@ export default Vue.extend({
       const data = await getAllMenu();
       this.list = data;
     },
-    handleEdit(index: number, row: any) {
-      console.log(index, row);
+    handleEdit(row: any) {
+      this.$router.push({
+        name: 'menu-edit',
+        params: {
+          id: row.id,
+        },
+      });
     },
     handleDelete(index: number, row: any) {
       this.$confirm('确认删除吗？', '删除提示', {})
