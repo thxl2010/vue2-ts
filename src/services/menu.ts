@@ -1,5 +1,5 @@
 /**
- * 用户相关请求模块
+ * 菜单相关请求模块
  */
 import { fetch, fetchJson } from '@/utils/request';
 import { MenuInterface } from '@/models/menu/Menu.interface';
@@ -34,7 +34,7 @@ export function getAllMenu(data: any = {}): Promise<any> {
 }
 
 /**
- * [获取所有菜单](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/getAllUsingGET)
+ * [删除菜单](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%8F%9C%E5%8D%95%E7%AE%A1%E7%90%86/deleteUsingDELETE)
  * @param data {object}
  * @param data.id {string|number}
  * @returns Promise<any>
