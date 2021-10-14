@@ -1,39 +1,16 @@
 <template>
   <el-dialog
-    :title="id ? '编辑资源' : '添加资源'"
+    :title="id ? '编辑分类' : '添加分类'"
     :visible="dialogVisible"
     :before-close="beforeClose"
     width="40%"
   >
     <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-      <el-form-item label="资源名称：" prop="name">
+      <el-form-item label="名称：" prop="name">
         <el-input v-model="form.name" style="width: 250px"></el-input>
       </el-form-item>
-      <el-form-item label="资源路径：" prop="url">
-        <el-input v-model="form.url" style="width: 250px"></el-input>
-      </el-form-item>
-      <el-form-item label="资源分类：" prop="categoryId">
-        <el-select
-          v-model="form.categoryId"
-          placeholder="资源分类"
-          style="width: 250px"
-          clearable
-        >
-          <el-option
-            v-for="item in resourceCategories"
-            :label="item.name"
-            :value="item.id"
-            :key="item.id"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="描述：" prop="description">
-        <el-input
-          type="textarea"
-          v-model="form.description"
-          rows="5"
-          style="width: 250px"
-        ></el-input>
+      <el-form-item label="排序：" prop="sort">
+        <el-input v-model="form.sort" style="width: 250px"></el-input>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -48,15 +25,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Form } from 'element-ui';
-import { saveOrUpdateResource } from '@/services/resource';
+import { saveOrUpdateResourceCategory } from '@/services/resourceCategory';
 
 export default Vue.extend({
-  name: 'ResourceCreateOrEdit',
+  name: 'ResourceCategoryCreateOrEdit',
   props: {
-    resourceCategories: {
-      type: Array,
-      default: () => [],
-    },
     dialogVisible: {
       type: Boolean,
       default: false,
@@ -75,12 +48,11 @@ export default Vue.extend({
       form: {
         // id: 0,
         name: '',
-        url: '',
-        categoryId: null,
+        sort: '',
       },
       rules: {
-        name: [{ required: true, message: '请输入资源名称', trigger: 'blur' }],
-        url: [{ required: true, message: '请输入资源路径', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
+        sort: [{ required: true, message: '请输入排序', trigger: 'blur' }],
       },
       isLoading: false,
     };
@@ -112,7 +84,7 @@ export default Vue.extend({
         if (valid) {
           this.isLoading = true;
           try {
-            await saveOrUpdateResource(option);
+            await saveOrUpdateResourceCategory(option);
             this.$message.success('提交成功');
             this.$emit('on-success');
           } catch (error) {
@@ -125,5 +97,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="scss" scoped></style>

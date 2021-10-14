@@ -47,8 +47,10 @@
       v-loading="isLoading"
       border
       style="width: 100%"
+      :header-cell-style="align"
+      :cell-style="align"
     >
-      <el-table-column type="index" label="编号"> </el-table-column>
+      <el-table-column type="index" label="编号" width="80"></el-table-column>
       <el-table-column prop="name" label="资源名称"></el-table-column>
       <el-table-column prop="url" label="资源路径"></el-table-column>
       <el-table-column prop="description" label="描述"> </el-table-column>
@@ -115,6 +117,7 @@ export default Vue.extend({
   props: {},
   data() {
     return {
+      align: { textAlign: 'center' },
       resourceCategories: [],
       form: {
         id: '',
@@ -213,7 +216,7 @@ export default Vue.extend({
     },
 
     handleClickResourceCategories() {
-      console.log('handleClickResourceCategories');
+      this.$router.push({ name: 'resource-category' });
     },
   },
 });
