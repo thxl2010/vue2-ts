@@ -177,15 +177,21 @@ export default Vue.extend({
     /**
      * 分配菜单
      */
-    handleAllocateMenu() {
-      console.log('handleAllocateMenu');
+    handleAllocateMenu(row: any) {
+      this.$router.push({
+        name: 'alloc-menu',
+        params: { roleId: row.id },
+      });
     },
 
     /**
      * 分配资源
      */
-    handleAllocateResource() {
-      console.log('handleAllocateResource');
+    handleAllocateResource(row: any) {
+      this.$router.push({
+        name: 'alloc-resource',
+        params: { roleId: row.id },
+      });
     },
   },
 });

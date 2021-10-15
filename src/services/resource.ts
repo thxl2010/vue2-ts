@@ -50,12 +50,30 @@ export function saveOrUpdateResource(data: any = {}): Promise<any> {
 }
 
 /**
+ * [获取所有资源](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/getAllUsingGET_1)
+ * @returns {Promise<any>}
+ */
+export function getAllResources(): Promise<any> {
+  return fetch('/boss/resource/getAll', {}, 'get');
+}
+
+/**
  * [给角色分配资源](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/allocateRoleResourcesUsingPOST)
  * @param {object} data
- * @param {number|string} data.userId
+ * @param {number|string} data.roleId
  * @param {array} data.resourceIdList
  * @returns {Promise<any>}
  */
 export function allocateRoleResources(data: any = {}): Promise<any> {
   return fetchJson('/boss/resource/allocateRoleResources', data, 'post');
+}
+
+/**
+ * [获取角色拥有的资源列表](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86/getRoleResourcesUsingGET)
+ * @param {object} data
+ * @param data.roleId {number|string}
+ * @returns {Promise<any>}
+ */
+export function getRoleResources(data: any = {}): Promise<any> {
+  return fetch('/boss/resource/getRoleResources', data, 'get');
 }

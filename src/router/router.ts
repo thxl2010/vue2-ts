@@ -8,6 +8,7 @@ const routes: Array<RouteConfig> = [
     name: 'login',
     component: () =>
       import(/* webpackChunkName: 'login' */ '@/views/login/index.vue'),
+    meta: { title: 'Edu boss管理系统' },
   },
   {
     path: '/',
@@ -18,21 +19,41 @@ const routes: Array<RouteConfig> = [
         name: 'home',
         component: () =>
           import(/* webpackChunkName: 'home' */ '@/views/home/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Edu boss管理系统' },
       },
       {
         path: '/role',
         name: 'role',
         component: () =>
           import(/* webpackChunkName: 'role' */ '@/views/role/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '角色管理' },
+      },
+      {
+        path: '/role/:roleId/alloc-menu',
+        name: 'alloc-menu',
+        component: () =>
+          import(
+            /* webpackChunkName: 'alloc-menu' */ '@/views/role/alloc-menu.vue'
+          ),
+        meta: { requiresAuth: true, title: '角色菜单管理' },
+        props: true, // 将路由路径参数映射到 props 数据中
+      },
+      {
+        path: '/role/:roleId/alloc-resource',
+        name: 'alloc-resource',
+        component: () =>
+          import(
+            /* webpackChunkName: 'alloc-menu' */ '@/views/role/alloc-resource.vue'
+          ),
+        meta: { requiresAuth: true, title: '角色资源管理' },
+        props: true, // 将路由路径参数映射到 props 数据中
       },
       {
         path: '/menu',
         name: 'menu',
         component: () =>
           import(/* webpackChunkName: 'menu' */ '@/views/menu/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '菜单管理' },
       },
       {
         path: '/menu/create',
@@ -41,7 +62,7 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'menu-create-edit' */ '@/views/menu/create.vue'
           ),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '添加菜单' },
       },
       {
         path: '/menu/edit/:id',
@@ -50,7 +71,7 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'menu-create-edit' */ '@/views/menu/edit.vue'
           ),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '编辑菜单' },
       },
       {
         path: '/resource',
@@ -59,7 +80,7 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'resource' */ '@/views/resource/index.vue'
           ),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '资源管理' },
       },
       {
         path: '/resource/category',
@@ -68,21 +89,21 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'resource' */ '@/views/resource/category.vue'
           ),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '资源分类' },
       },
       {
         path: '/course',
         name: 'course',
         component: () =>
           import(/* webpackChunkName: 'course' */ '@/views/course/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '课程管理' },
       },
       {
         path: '/user',
         name: 'user',
         component: () =>
           import(/* webpackChunkName: 'user' */ '@/views/user/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '用户管理' },
       },
       // ! url /advert 会被广告拦截插件拦截
       {
@@ -90,7 +111,7 @@ const routes: Array<RouteConfig> = [
         name: 'advert',
         component: () =>
           import(/* webpackChunkName: 'advert' */ '@/views/advert/index.vue'),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '广告管理' },
       },
       {
         path: '/advert-space',
@@ -99,7 +120,7 @@ const routes: Array<RouteConfig> = [
           import(
             /* webpackChunkName: 'advert-space' */ '@/views/advert-space/index.vue'
           ),
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: '广告位列表' },
       },
     ],
   },

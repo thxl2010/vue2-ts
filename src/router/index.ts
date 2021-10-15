@@ -26,4 +26,8 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+router.afterEach((to) => {
+  document.title = to.meta?.title || 'Edu boss管理系统';
+});
+
 export default router;
