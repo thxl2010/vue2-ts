@@ -99,6 +99,26 @@ const routes: Array<RouteConfig> = [
         meta: { requiresAuth: true, title: '课程管理' },
       },
       {
+        path: '/course/:courseId/edit',
+        name: 'course-edit',
+        component: () =>
+          import(
+            /* webpackChunkName: 'course-edit' */ '@/views/course/edit.vue'
+          ),
+        props: true,
+        meta: { requiresAuth: true, title: '课程管理 / 营销信息' },
+      },
+      {
+        path: '/course/:courseId/section',
+        name: 'course-section',
+        component: () =>
+          import(
+            /* webpackChunkName: 'course-section' */ '@/views/course/section.vue'
+          ),
+        props: true,
+        meta: { requiresAuth: true, title: '课程管理 / 课程结构' },
+      },
+      {
         path: '/user',
         name: 'user',
         component: () =>

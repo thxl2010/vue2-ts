@@ -73,9 +73,7 @@
             :inactive-value="STATUS.DISABLE"
             active-color="#13ce66"
             inactive-color="#ff4949"
-            @change="
-              handleEnableOrForbidUser(false, /* 第一个参数忽略 */ scope.row)
-            "
+            @change="handleEnableOrForbidUser(scope.row)"
           >
           </el-switch>
         </template>
@@ -215,8 +213,7 @@ export default Vue.extend({
       this.onSubmit();
     },
 
-    async handleEnableOrForbidUser(status: boolean, user: any) {
-      console.log('handleEnableOrForbidUser :', status);
+    async handleEnableOrForbidUser(user: any) {
       const option = { userId: user.id };
       try {
         const data = user.status
