@@ -2,7 +2,7 @@
   <div class="header">
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-      <el-breadcrumb-item>{{ $route.meta.name }}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{ $route.meta.title }}</el-breadcrumb-item>
     </el-breadcrumb>
     <el-dropdown>
       <span class="el-dropdown-link">

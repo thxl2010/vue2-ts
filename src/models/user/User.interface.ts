@@ -19,3 +19,11 @@ export interface UserInfoInterface {
   userName: string;
   portrait: string;
 }
+export interface UsersQueryFormInterface {
+  phone?: string;
+  userId?: string | number;
+  startCreateTime?: string; // string(date-time)
+  endCreateTime?: string; // string(date-time)
+  currentPage?: number;
+  pageSize?: number;
+}

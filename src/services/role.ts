@@ -51,3 +51,21 @@ export function deleteRole(data: any = {}): Promise<any> {
 export function allocateUserRoles(data: any = {}): Promise<any> {
   return fetchJson('/boss/role/allocateUserRoles', data, 'post');
 }
+
+/**
+ * [获取所有角色](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%A7%92%E8%89%B2%E7%AE%A1%E7%90%86/getAllUsingGET_2)
+ * @returns {Promise<any>}
+ */
+export function getAllRoles(): Promise<any> {
+  return fetch('/boss/role/all', {}, 'get');
+}
+/**
+ * [查询用户角色](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%A7%92%E8%89%B2%E7%AE%A1%E7%90%86/getUserRolesUsingGET)
+ * @param {object} data
+ * @param {string | number} data.userId
+ * @returns {Promise<any>}
+ */
+export function getUserRoles(data: any): Promise<any> {
+  const { userId } = data;
+  return fetch(`/boss/role/user/${userId}`, {}, 'get');
+}
