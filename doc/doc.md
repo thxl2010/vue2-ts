@@ -1,7 +1,11 @@
-# 网站: http://eduboss.lagou.com/
+# 网站:
 
-账号: 18201288771
-密码: 111111
+- http://eduboss.lagou.com/
+
+  账号: 18201288771
+  密码: 111111
+
+- http://edufront.lagou.com/
 
 # api
 
