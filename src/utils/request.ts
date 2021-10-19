@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 import JSONbig from 'json-bigint';
 import qs from 'qs';
-import { isJson } from './index';
+import { isJson, isForm } from './index';
 import store from '@/store/index';
 import { SET_USER } from '@/store/types';
 import { Message } from 'element-ui';
@@ -34,7 +34,7 @@ request.interceptors.request.use(
     if (config.method?.toLowerCase() !== 'get') {
       if (isJson(config)) {
         config.data = JSON.stringify(config.data);
-      } else {
+      } else if (!isForm(config)) {
         config.data = qs.stringify(config.data, {
           arrayFormat: 'repeat', // indices/brackets/repeat
           allowDots: true,
@@ -250,6 +250,27 @@ const fetchJson = (
   return request(config);
 };
 
+const upload = (
+  url: string,
+  data: any,
+  onUploadProgress: (progressEvent: ProgressEvent) => void
+): AxiosPromise => {
+  const config: AxiosRequestConfig = {
+    method: 'post',
+    url,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    data,
+  };
+
+  if (onUploadProgress) {
+    data.onUploadProgress = onUploadProgress;
+  }
+
+  return request(config);
+};
+
 export default request;
 
-export { fetch, fetchJson };
+export { fetch, fetchJson, upload };

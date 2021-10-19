@@ -6,6 +6,12 @@ export function isJson(req: AxiosRequestConfig): boolean {
   return contentType === 'application/json';
 }
 
+export function isForm(req: AxiosRequestConfig): boolean {
+  const str = req.headers['Content-Type'] || req.headers['content-type'] || '';
+  const contentType = str.split(';')[0];
+  return contentType === 'multipart/form-data';
+}
+
 export function encodeHtml(str: string): string {
   if (str.length == 0) return '';
 
