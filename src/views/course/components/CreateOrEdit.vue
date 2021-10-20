@@ -125,7 +125,7 @@
           </template>
         </div>
         <div v-show="step === 4">
-          <el-form-item label="课程详情">
+          <el-form-item label="">
             <text-editor v-model="form.courseDescriptionMarkDown" />
           </el-form-item>
           <el-form-item label="是否发布">

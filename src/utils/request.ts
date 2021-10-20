@@ -253,7 +253,7 @@ const fetchJson = (
 const upload = (
   url: string,
   data: any,
-  onUploadProgress: (progressEvent: ProgressEvent) => void
+  onUploadProgress?: (progressEvent: ProgressEvent) => void
 ): AxiosPromise => {
   const config: AxiosRequestConfig = {
     method: 'post',

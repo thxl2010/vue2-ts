@@ -32,7 +32,7 @@ export function changeState(data: any = {}): Promise<any> {
  */
 export function uploadCourseImage(
   data: any,
-  onUploadProgress: (progressEvent: ProgressEvent) => void
+  onUploadProgress?: (progressEvent: ProgressEvent) => void
 ): Promise<any> {
   return upload('/boss/course/upload', data, onUploadProgress);
 }
