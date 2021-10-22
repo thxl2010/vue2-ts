@@ -12,3 +12,9 @@ declare module 'vue/types/vue' {
     $catchError: catchErr;
   }
 }
+
+declare global {
+  interface Window {
+    AliyunUpload: any;
+  }
+}

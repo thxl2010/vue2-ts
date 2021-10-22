@@ -16,3 +16,13 @@ import { fetch, fetchJson } from '@/utils/request';
 export function saveOrUpdateLesson(data: any = {}): Promise<any> {
   return fetchJson('/boss/course/lesson/saveOrUpdate', data, 'post');
 }
+
+/**
+ * [通过Id获取课时](http://eduboss.lagou.com/boss/doc.html#/edu-boss-boot/%E8%AF%BE%E6%97%B6%E5%86%85%E5%AE%B9/saveOrUpdateUsingPOST)
+ * @param {object} data
+ * @param {string | number} [data.lessonId]
+ * @returns {Promise<any>}
+ */
+export function getLessonById(data: any = {}): Promise<any> {
+  return fetch('/boss/course/lesson/getById', data, 'get');
+}

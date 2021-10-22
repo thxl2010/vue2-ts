@@ -291,7 +291,12 @@ export default Vue.extend({
       this.isAddLessonShow = false;
     },
     async handleChangeLessonStatus(lesson: any) {
-      await saveOrUpdateLesson(lesson);
+      const { id, status } = lesson;
+      const data = {
+        id,
+        status,
+      };
+      await saveOrUpdateLesson(data);
       this.$message.success('操作成功');
     },
 

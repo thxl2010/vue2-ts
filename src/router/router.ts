@@ -129,6 +129,16 @@ const routes: Array<RouteConfig> = [
         meta: { requiresAuth: true, title: '课程管理 / 课程结构' },
       },
       {
+        path: '/course/:courseId/video',
+        name: 'course-video',
+        component: () =>
+          import(
+            /* webpackChunkName: 'course-video' */ '@/views/course/video.vue'
+          ),
+        props: true,
+        meta: { requiresAuth: true, title: '课程管理 / 课程结构 / 上传视频' },
+      },
+      {
         path: '/user',
         name: 'user',
         component: () =>
